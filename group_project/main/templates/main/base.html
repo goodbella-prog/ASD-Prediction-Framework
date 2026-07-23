@@ -1,0 +1,134 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{% block title %}ASD Prediction Framework{% endblock %}</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+```
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+
+<div class="container">
+
+<a class="navbar-brand fw-bold text-primary fs-3" href="{% url 'home' %}">
+<i class="fa-solid fa-brain"></i> ASD Predictor
+</a>
+
+<button class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarNav">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="navbarNav">
+
+<ul class="navbar-nav ms-auto align-items-lg-center">
+
+<li class="nav-item">
+<a class="nav-link px-3" href="{% url 'home' %}">
+Home
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link px-3" href="{% url 'predict' %}">
+Prediction
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link px-3" href="{% url 'evaluation' %}">
+Evaluation
+</a>
+</li>
+
+<li class="nav-item ms-lg-3">
+
+<a href="{% url 'predict' %}"
+class="btn btn-primary rounded-pill px-4">
+
+Start Screening
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="py-5">
+
+<div class="container">
+
+{% block content %}
+
+{% endblock %}
+
+</div>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="bg-primary text-white py-4 mt-5">
+
+<div class="container text-center">
+
+<h5 class="mb-2">
+<i class="fa-solid fa-brain"></i>
+ASD Prediction Framework
+</h5>
+
+<p class="mb-1">
+Explainable AI-Based Prediction Framework for Autism Spectrum Disorder
+</p>
+
+<small>
+© 2026 Final Year Project. All Rights Reserved.
+</small>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

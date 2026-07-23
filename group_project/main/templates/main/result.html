@@ -1,0 +1,136 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Prediction Result{% endblock %}
+
+{% block content %}
+
+<div class="card p-5 text-center">
+
+    <h2 class="text-primary">
+        Prediction Result
+    </h2>
+
+    <hr>
+
+    <h1 class="display-5">
+
+        {{ prediction }}
+
+    </h1>
+
+    <h4 class="mt-4">
+
+        Confidence: {{ confidence }}%
+
+    </h4>
+    <hr>
+    
+
+<h3>Why was this prediction made?</h3>
+<hr>
+
+<h3 class="text-center mb-4">
+    AI Explanation
+</h3>
+
+<p class="text-muted text-center">
+    The AI considered all questionnaire responses and demographic information.
+    Positive values increased the likelihood of ASD, while negative values reduced it.
+</p>
+
+<table class="table table-hover table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Feature</th>
+            <th>SHAP Value</th>
+            <th>Impact</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for feature, importance in explanation.items %}
+
+        <tr>
+
+            <td>{{ feature }}</td>
+
+            <td>
+
+                {% if importance > 0 %}
+                    <span class="badge bg-danger">
+                        +{{ importance }}
+                    </span>
+
+                {% elif importance < 0 %}
+                    <span class="badge bg-success">
+                        {{ importance }}
+                    </span>
+
+                {% else %}
+                    <span class="badge bg-secondary">
+                        {{ importance }}
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {% if importance > 0 %}
+                    Increased ASD likelihood
+
+                {% elif importance < 0 %}
+                    Reduced ASD likelihood
+
+                {% else %}
+                    No significant impact
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+<hr>
+
+<h3 class="mt-4">
+    AI Explanation Chart
+</h3>
+
+<img
+    src="{% static 'images/shap_bar.png' %}"
+    class="img-fluid rounded shadow"
+    alt="SHAP Explanation">
+<div class="alert alert-info mt-4">
+
+    <h4>AI Summary</h4>
+
+    <p>
+
+        This prediction was generated using a Machine Learning model.
+
+        The model examined the questionnaire responses,
+        demographic information and AQ score.
+
+        Features with positive SHAP values contributed towards the prediction of Autism Spectrum Disorder,
+        while negative SHAP values reduced the likelihood.
+
+    </p>
+
+</div>
+    <a href="{% url 'predict' %}" class="btn btn-primary mt-4">
+        Make Another Prediction
+    </a>
+
+</div>
+
+{% endblock %}

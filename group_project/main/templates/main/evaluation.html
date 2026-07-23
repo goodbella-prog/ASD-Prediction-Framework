@@ -1,0 +1,79 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Model Evaluation{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center text-primary mb-4">
+        Model Evaluation
+    </h2>
+
+    <div class="card shadow p-4">
+
+        <h4>Performance Metrics</h4>
+
+        <table class="table table-bordered mt-3">
+
+            <tr>
+                <th>Accuracy</th>
+                <td>85%</td>
+            </tr>
+
+            <tr>
+                <th>Precision</th>
+                <td>0.91</td>
+            </tr>
+
+            <tr>
+                <th>Recall</th>
+                <td>0.62</td>
+            </tr>
+
+            <tr>
+                <th>F1 Score</th>
+                <td>0.62</td>
+            </tr>
+
+            <tr>
+                <th>ROC-AUC</th>
+                <td>0.88</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <br>
+
+    <div class="card shadow p-4">
+
+        <h4 class="text-center">
+            Model Accuracy Comparison
+        </h4>
+
+        <img
+        src="{% static 'images/model_accuracy.png' %}"
+        class="img-fluid">
+
+    </div>
+
+    <br>
+
+    <div class="card shadow p-4">
+
+        <h4 class="text-center">
+            Confusion Matrix
+        </h4>
+
+        <img
+        src="{% static 'images/confusion_matrix.png' %}"
+        class="img-fluid">
+
+    </div>
+
+</div>
+
+{% endblock %}
