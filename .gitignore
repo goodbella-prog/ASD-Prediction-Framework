@@ -19,3 +19,5 @@ staticfiles/
 # OS files
 .DS_Store
 Thumbs.db
+# Generated SHAP explanation image
+group_project/main/static/images/shap_bar.png

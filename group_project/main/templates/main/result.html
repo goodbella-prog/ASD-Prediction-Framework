@@ -1,135 +1,233 @@
-{% extends 'main/base.html' %}
-{% load static %}
+{% extends "main/base.html" %}
 
-{% block title %}Prediction Result{% endblock %}
+{% block title %}Screening Result{% endblock %}
 
 {% block content %}
 
-<div class="card p-5 text-center">
+<div class="container py-5">
 
-    <h2 class="text-primary">
-        Prediction Result
-    </h2>
+    <div class="row justify-content-center">
 
-    <hr>
+        <div class="col-lg-9">
 
-    <h1 class="display-5">
+            <div class="card shadow-lg border-0">
 
-        {{ prediction }}
+                <div class="card-header text-center">
 
-    </h1>
+                    <h2 class="mb-0">
 
-    <h4 class="mt-4">
+                         <i class="bi bi-cpu-fill">Autism Screening Result</i>
 
-        Confidence: {{ confidence }}%
+                    </h2>
 
-    </h4>
-    <hr>
-    
+                </div>
 
-<h3>Why was this prediction made?</h3>
-<hr>
+                <div class="card-body p-5">
 
-<h3 class="text-center mb-4">
-    AI Explanation
-</h3>
+                    {% if prediction == "ASD Detected" %}
 
-<p class="text-muted text-center">
-    The AI considered all questionnaire responses and demographic information.
-    Positive values increased the likelihood of ASD, while negative values reduced it.
+                    <div class="text-center mb-5">
+
+                        <div class="display-1 mb-3">
+
+                            <i class="bi bi-check-circle-fill text-success"></i>
+
+                        </div>
+
+                        <h2 class="fw-bold text-warning">
+
+                            ASD Detected
+
+                        </h2>
+
+                        <p class="text-muted">
+
+                            The AI model identified characteristics commonly associated with Autism Spectrum Disorder.
+
+                        </p>
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="text-center mb-5">
+
+                        <div class="display-1 mb-3">
+
+                            <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+
+                        </div>
+
+                        <h2 class="fw-bold text-success">
+
+                            No ASD Detected
+
+                        </h2>
+
+                        <p class="text-muted">
+
+                            The AI model did not identify significant characteristics associated with Autism Spectrum Disorder.
+
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+                    <hr class="my-4">
+
+                    <div class="row text-center">
+
+                        <div class="col-md-6 mb-4">
+
+                            <div class="p-4 bg-light rounded">
+
+                                <h5 class="text-muted">
+
+                                    Confidence Score
+
+                                </h5>
+
+                                <h1 class="display-4 fw-bold text-primary">
+
+                                    {{ confidence }}%
+
+                                </h1>
+
+                                <div class="progress mt-3">
+
+                                    <div class="progress-bar"
+
+                                         role="progressbar"
+
+                                         style="width: {{ confidence }}%;">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+
+                            <div class="p-4 bg-light rounded">
+
+                                <h5 class="text-muted">
+
+                                    Prediction Status
+
+                                </h5>
+
+                                <h3 class="fw-bold mt-4">
+
+                                    {{ prediction }}
+
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+
+            <div class="col-md-4 mb-4">
+             <div class="p-4 bg-light rounded">
+
+        <h5 class="text-muted">
+            Risk Level
+        </h5>
+
+        {% if prediction == "ASD Detected" %}
+
+            {% if confidence >= 80 %}
+                <h3 class="fw-bold text-danger">High</h3>
+            {% elif confidence >= 60 %}
+                <h3 class="fw-bold text-warning">Moderate</h3>
+            {% else %}
+                <h3 class="fw-bold text-info">Low</h3>
+            {% endif %}
+
+        {% else %}
+
+            <h3 class="fw-bold text-success">
+                Low
+            </h3>
+
+        {% endif %}
+
+    </div>
+</div>
+</div>
+
+                    <div class="card mt-4 border-0 shadow-sm">
+
+                        <div class="card-header">
+
+                            <h4 class="mb-0">
+
+                                <i class="bi bi-cpu-fill"> Explainable AI Analysis</i>
+
+                            </h4>
+
+                        </div>
+
+                        <div class="card-body">
+
+<p class="text-muted">
+
+The AI model considered several input features before making its prediction. The explanation below highlights the most influential factors that contributed to the screening result.
+
 </p>
 
-<table class="table table-hover table-bordered">
-    <thead class="table-dark">
-        <tr>
-            <th>Feature</th>
-            <th>SHAP Value</th>
-            <th>Impact</th>
-        </tr>
-    </thead>
+{{ explanation|safe }}
+                        </div>
 
-    <tbody>
+                    </div>
 
-    {% for feature, importance in explanation.items %}
+                    <div class="alert alert-warning mt-4">
 
-        <tr>
+                        <h5>
 
-            <td>{{ feature }}</td>
+                            Recommendation
 
-            <td>
+                        </h5>
 
-                {% if importance > 0 %}
-                    <span class="badge bg-danger">
-                        +{{ importance }}
-                    </span>
+                        <p class="mb-0">
 
-                {% elif importance < 0 %}
-                    <span class="badge bg-success">
-                        {{ importance }}
-                    </span>
+                            This screening is intended as an AI-assisted preliminary assessment only.
+                            It is not a substitute for a clinical diagnosis. If you have concerns
+                            about Autism Spectrum Disorder, please consult a qualified healthcare professional
+                            for a comprehensive evaluation.
 
-                {% else %}
-                    <span class="badge bg-secondary">
-                        {{ importance }}
-                    </span>
+                        </p>
 
-                {% endif %}
+                    </div>
 
-            </td>
+                    <div class="d-flex justify-content-center gap-3 mt-5 flex-wrap">
 
-            <td>
+                        <a href="{% url 'predict' %}"
 
-                {% if importance > 0 %}
-                    Increased ASD likelihood
+                           class="btn btn-primary btn-lg">
 
-                {% elif importance < 0 %}
-                    Reduced ASD likelihood
+                            New Screening
+                        </a>
+                        <a href="{% url 'export_pdf' %}?prediction={{ prediction }}&confidence={{ confidence }}"
+   class="btn btn-outline-primary btn-lg">
+    Download Report
+</a>
 
-                {% else %}
-                    No significant impact
+                    </div>
 
-                {% endif %}
+                </div>
 
-            </td>
+            </div>
 
-        </tr>
+        </div>
 
-    {% endfor %}
-
-    </tbody>
-
-</table>
-
-<hr>
-
-<h3 class="mt-4">
-    AI Explanation Chart
-</h3>
-
-<img
-    src="{% static 'images/shap_bar.png' %}"
-    class="img-fluid rounded shadow"
-    alt="SHAP Explanation">
-<div class="alert alert-info mt-4">
-
-    <h4>AI Summary</h4>
-
-    <p>
-
-        This prediction was generated using a Machine Learning model.
-
-        The model examined the questionnaire responses,
-        demographic information and AQ score.
-
-        Features with positive SHAP values contributed towards the prediction of Autism Spectrum Disorder,
-        while negative SHAP values reduced the likelihood.
-
-    </p>
-
-</div>
-    <a href="{% url 'predict' %}" class="btn btn-primary mt-4">
-        Make Another Prediction
-    </a>
+    </div>
 
 </div>
 

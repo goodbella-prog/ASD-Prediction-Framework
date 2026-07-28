@@ -67,46 +67,42 @@ def explain_prediction(data):
             base_value = explainer.expected_value
 
     # Build explanation dictionary
-    explanation = {}
+    # Build HTML explanation
+    html = """
+    <h5 class="mb-3">Top Factors Influencing the Prediction</h5>
+    <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>Impact</th>
+    </tr>
+    </thead>
+    <tbody>
+    """
 
     for feature, value in zip(feature_names, values):
+
         display_name = feature_labels.get(feature, feature)
-        explanation[display_name] = round(float(value), 4)
 
-    # Save SHAP bar chart
-    save_dir = os.path.join("main", "static", "images")
-    os.makedirs(save_dir, exist_ok=True)
+        colour = "green" if value < 0 else "red"
 
-    explanation_obj = shap.Explanation(
-        values=values,
-        base_values=base_value,
-        data=sample.iloc[0].values,
-        feature_names=display_feature_names,
-    )
+        html += f"""
+        <tr>
+            <td>{display_name}</td>
+            <td style="color:{colour}; font-weight:bold;">
+                {value:.4f}
+            </td>
+        </tr>
+        """
 
-    import numpy as np
+    html += """
+    </tbody>
+    </table>
 
-    # Top 10 most important features
-    indices = np.argsort(np.abs(values))[::-1][:10]
+    <h5 class="mt-4">Feature Importance Chart</h5>
 
-    top_values = values[indices]
-    top_names = [display_feature_names[i] for i in indices]
+    <img src="/static/images/shap_bar.png"
+         class="img-fluid rounded shadow">
+    """
 
-    plt.figure(figsize=(10, 6))
-
-    plt.barh(top_names[::-1], top_values[::-1])
-
-    plt.xlabel("SHAP Value")
-    plt.title("Top 10 Features Influencing the Prediction")
-
-    plt.tight_layout()
-
-    plt.savefig(
-        os.path.join(save_dir, "shap_bar.png"),
-        dpi=300,
-        bbox_inches="tight"
-    )
-
-    plt.close()
-
-    return explanation
+    return html

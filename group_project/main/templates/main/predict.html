@@ -1,5 +1,4 @@
 {% extends 'main/base.html' %}
-{% load static %}
 
 {% block title %}ASD Screening{% endblock %}
 
@@ -7,21 +6,68 @@
 
 <div class="container py-5">
 
-    <!-- Page Header -->
+    <!-- Header -->
+
     <div class="text-center mb-5">
 
-        <span class="badge bg-primary fs-6 mb-3">
-            Explainable AI Screening
-        </span>
+        <h1 class="display-5 fw-bold text-primary">
 
-        <h1 class="fw-bold">
-            🧠 Autism Spectrum Disorder Screening
+            Autism Spectrum Disorder Screening
+
         </h1>
 
-        <p class="text-muted">
-            Complete the questionnaire below. The AI model will analyze your
-            responses and provide an explainable prediction.
+        <p class="lead text-muted">
+
+            Complete the screening below. The AI model will analyse your responses
+            and provide an explainable prediction.
+
         </p>
+
+    </div>
+
+    <!-- Progress -->
+
+    <div class="progress-steps mb-5">
+
+        <div class="step active">
+
+            <div class="circle">
+
+                <i class="bi bi-person-fill"></i>
+
+            </div>
+
+            <span>Personal Information</span>
+
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step active">
+
+            <div class="circle">
+
+                <i class="bi bi-ui-checks-grid"></i>
+
+            </div>
+
+            <span>Questionnaire</span>
+
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step">
+
+            <div class="circle">
+
+                <i class="bi bi-graph-up-arrow"></i>
+
+            </div>
+
+            <span>AI Result</span>
+
+        </div>
 
     </div>
 
@@ -29,90 +75,118 @@
 
         {% csrf_token %}
 
-        <!-- Progress -->
-        <div class="mb-5">
-
-            <div class="d-flex justify-content-between">
-
-                <strong>Screening Progress</strong>
-
-                <span>100%</span>
-
-            </div>
-
-            <div class="progress mt-2" style="height:10px;">
-
-                <div class="progress-bar bg-primary"
-                     style="width:100%;">
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- PERSONAL INFORMATION -->
+        <!-- Personal Information -->
 
         <div class="card shadow-sm border-0 mb-5">
 
-            <div class="card-header bg-primary text-white">
+            <div class="card-header">
 
                 <h4 class="mb-0">
-                    <i class="fas fa-user-circle"></i>
+
                     Personal Information
+
                 </h4>
 
             </div>
 
             <div class="card-body">
 
-                <div class="row">
+                <div class="row g-4">
 
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Age</label>
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Age
+
+                        </label>
+
                         {{ form.age }}
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Gender</label>
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Gender
+
+                        </label>
+
                         {{ form.gender }}
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Ethnicity</label>
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Ethnicity
+
+                        </label>
+
                         {{ form.ethnicity }}
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Country of Residence</label>
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Country
+
+                        </label>
+
                         {{ form.contry_of_res }}
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6">
+
                         <label class="form-label">
+
                             Jaundice at Birth
+
                         </label>
+
                         {{ form.jaundice }}
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6">
+
                         <label class="form-label">
+
                             Family History of Autism
+
                         </label>
+
                         {{ form.austim }}
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6">
+
                         <label class="form-label">
-                            Used Autism Screening App Before
+
+                            Previously Used Autism Screening App
+
                         </label>
+
                         {{ form.used_app_before }}
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6">
+
                         <label class="form-label">
-                            Relationship
+
+                            Relationship to Patient
+
                         </label>
+
                         {{ form.relation }}
+
                     </div>
 
                 </div>
@@ -121,21 +195,15 @@
 
         </div>
 
-        <!-- Hidden Field -->
-
-        {{ form.result }}
-
-        <!-- AQ-10 QUESTIONS -->
+        <!-- Questionnaire -->
 
         <div class="card shadow-sm border-0">
 
-            <div class="card-header bg-primary text-white">
+            <div class="card-header">
 
                 <h4 class="mb-0">
 
-                    <i class="fas fa-clipboard-check"></i>
-
-                    AQ-10 Screening Questionnaire
+                    AQ-10 Questionnaire
 
                 </h4>
 
@@ -143,102 +211,167 @@
 
             <div class="card-body">
 
-                <div class="mb-4">
-                    <h5>Question 1</h5>
-                    <p>I often notice small sounds when others do not.</p>
+                <div class="question-card">
+
+                    <div class="question-title">Question 1</div>
+
+                    <div class="question-text">
+                        I often notice small sounds when others do not.
+                    </div>
+
                     {{ form.A1_Score }}
+
                 </div>
 
-                <hr>
+                <div class="question-card">
 
-                <div class="mb-4">
-                    <h5>Question 2</h5>
-                    <p>I usually concentrate more on the whole picture than the small details.</p>
+                    <div class="question-title">Question 2</div>
+
+                    <div class="question-text">
+                        I usually concentrate more on the whole picture than the small details.
+                    </div>
+
                     {{ form.A2_Score }}
+
                 </div>
 
-                <hr>
+                <div class="question-card">
 
-                <div class="mb-4">
-                    <h5>Question 3</h5>
-                    <p>I find it easy to do more than one thing at once.</p>
+                    <div class="question-title">Question 3</div>
+
+                    <div class="question-text">
+                        I find it easy to do more than one thing at once.
+                    </div>
+
                     {{ form.A3_Score }}
+
                 </div>
 
-                <hr>
+                <div class="question-card">
 
-                <div class="mb-4">
-                    <h5>Question 4</h5>
-                    <p>If there is an interruption, I can switch back quickly.</p>
+                    <div class="question-title">Question 4</div>
+
+                    <div class="question-text">
+                        If interrupted, I can quickly return to what I was doing.
+                    </div>
+
                     {{ form.A4_Score }}
+
                 </div>
 
-                <hr>
+                <div class="question-card">
 
-                <div class="mb-4">
-                    <h5>Question 5</h5>
-                    <p>I find it easy to read between the lines when someone is talking.</p>
+                    <div class="question-title">Question 5</div>
+
+                    <div class="question-text">
+                        I find it easy to read between the lines when someone is talking.
+                    </div>
+
                     {{ form.A5_Score }}
+
                 </div>
 
-                <hr>
+                <div class="question-card">
 
-                <div class="mb-4">
-                    <h5>Question 6</h5>
-                    <p>I know if someone listening to me is getting bored.</p>
+                    <div class="question-title">Question 6</div>
+
+                    <div class="question-text">
+                        I know when someone listening to me is becoming bored.
+                    </div>
+
                     {{ form.A6_Score }}
+
                 </div>
 
-                <hr>
+                <div class="question-card">
 
-                <div class="mb-4">
-                    <h5>Question 7</h5>
-                    <p>When reading a story I find it difficult to work out the characters' intentions.</p>
+                    <div class="question-title">Question 7</div>
+
+                    <div class="question-text">
+                        When reading a story, I find it difficult to understand the characters' intentions.
+                    </div>
+
                     {{ form.A7_Score }}
+
                 </div>
 
-                <hr>
+                <div class="question-card">
 
-                <div class="mb-4">
-                    <h5>Question 8</h5>
-                    <p>I like to collect information about categories of things.</p>
+                    <div class="question-title">Question 8</div>
+
+                    <div class="question-text">
+                        I enjoy collecting information about categories of things.
+                    </div>
+
                     {{ form.A8_Score }}
+
                 </div>
 
-                <hr>
+                <div class="question-card">
 
-                <div class="mb-4">
-                    <h5>Question 9</h5>
-                    <p>I find it easy to work out what someone is thinking or feeling by looking at their face.</p>
+                    <div class="question-title">Question 9</div>
+
+                    <div class="question-text">
+                        I find it easy to understand what someone is thinking or feeling by looking at their face.
+                    </div>
+
                     {{ form.A9_Score }}
+
                 </div>
 
-                <hr>
+                <div class="question-card">
 
-                <div class="mb-4">
-                    <h5>Question 10</h5>
-                    <p>I find it difficult to work out people's intentions.</p>
+                    <div class="question-title">Question 10</div>
+
+                    <div class="question-text">
+                        I find it difficult to understand other people's intentions.
+                    </div>
+
                     {{ form.A10_Score }}
+
                 </div>
 
             </div>
 
         </div>
 
+        <!-- Button -->
+
         <div class="text-center mt-5">
 
-            <button class="btn btn-primary btn-lg px-5">
-
-                <i class="fas fa-brain"></i>
-
-                Predict Autism
-
-            </button>
+            <button type="submit" class="btn btn-primary" id="predictBtn">
+                <i class="fas fa-brain">Analyze My Responses</i>
+</button>
 
         </div>
 
     </form>
 
 </div>
+<div id="loadingOverlay" class="loading-overlay">
+
+    <div class="loader-box">
+
+        <div class="spinner"></div>
+
+        <h4>Analyzing...</h4>
+
+        <p>
+            Our AI model is processing your responses.
+            Please wait.
+        </p>
+
+    </div>
+
+</div>
+<script>
+
+document.querySelector("form").addEventListener("submit", function(){
+
+    document.getElementById("loadingOverlay").style.display = "flex";
+
+});
+
+</script>
 
 {% endblock %}

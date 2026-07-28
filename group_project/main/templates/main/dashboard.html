@@ -1,0 +1,156 @@
+{% extends "main/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="fw-bold text-primary">
+
+            <i class="bi bi-speedometer2"></i>
+            ASD Insight Dashboard
+
+        </h1>
+
+        <p class="text-muted">
+
+            System overview and screening statistics
+
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="card border-0 shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-people-fill display-3 text-primary"></i>
+
+                    <h5 class="mt-3">
+
+                        Total Screenings
+
+                    </h5>
+
+                    <h1 class="fw-bold text-primary">
+
+                        {{ total }}
+
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card border-0 shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-exclamation-circle-fill display-3 text-danger"></i>
+
+                    <h5 class="mt-3">
+
+                        ASD Detected
+
+                    </h5>
+
+                    <h1 class="fw-bold text-danger">
+
+                        {{ detected }}
+
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card border-0 shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-check-circle-fill display-3 text-success"></i>
+
+                    <h5 class="mt-3">
+
+                        No ASD Detected
+
+                    </h5>
+
+                    <h1 class="fw-bold text-success">
+
+                        {{ not_detected }}
+
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow border-0 mt-5">
+
+        <div class="card-header">
+
+            <h4>
+
+                <i class="bi bi-info-circle-fill"></i>
+
+                Dashboard Summary
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <p>
+
+                This dashboard summarizes all Autism Spectrum Disorder
+                screening records stored in the system.
+
+            </p>
+
+            <ul>
+
+                <li>
+                    Total screenings performed:
+                    <strong>{{ total }}</strong>
+                </li>
+
+                <li>
+                    Positive ASD predictions:
+                    <strong>{{ detected }}</strong>
+                </li>
+
+                <li>
+                    Negative ASD predictions:
+                    <strong>{{ not_detected }}</strong>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
